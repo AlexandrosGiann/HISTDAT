@@ -7,7 +7,7 @@ wn.title('Histdat by Alexandros Giannakis') # Πρόγραμμα από τον �
 wn.geometry("570x250")
 function = tk.IntVar(value=0)
 
-def search_word():
+def search_word(event=None):
     if run_lexigram.get() == 1:
         webbrowser.open('https://www.lexigram.gr/lex/arch/'+greek_word_input.get())
     webbrowser.open('https://myria.math.aegean.gr/lds/web/view.php?search='+greek_word_input.get())
@@ -154,7 +154,7 @@ more_urls = [['http://users.sch.gr/ipap/Ellinikos%20Politismos/Yliko/OMHROS-ILIA
              []
 ]
 
-def get_search():
+def get_search(event=None):
     author = search_textbox.get()
     for i in range(len(authors)):
         if make_clear(author) in authors[i]:
@@ -171,9 +171,9 @@ def greek_words():
     search_textbox.grid_forget()
     search_button.grid_forget()
     tlg_checkbox.grid_forget()
-    greek_word_input.grid(row=0, column=1)
-    greek_word_submit_button.grid(row=0, column=2)
-    lexigram_checkbox.grid(row=1, column=1)
+    greek_word_input.grid(row=0, column=2)
+    greek_word_submit_button.grid(row=0, column=3)
+    lexigram_checkbox.grid(row=1, column=1, sticky=tk.W)
     
 
 def greek_authors():
@@ -185,7 +185,7 @@ def greek_authors():
     canvas.create_image(20,20, anchor=tk.NW, image=bg)
     search_textbox.grid(row=0, column=2, sticky=tk.W+tk.E)
     search_button.grid(row=0, column=3, sticky=tk.W+tk.E)
-    tlg_checkbox.grid(row=1, column=1)
+    tlg_checkbox.grid(row=1, column=1, sticky=tk.W)
 
 bg = tk.PhotoImage(file = "greek_authors_img.png")
 f1_button = tk.Button(wn, text='Greek\nAuthors', width=7, height=2, command=greek_authors)
@@ -193,9 +193,11 @@ f2_button = tk.Button(wn, text='Greek\nWords', width=7, height=2, command=greek_
 f1_button.grid(row=1, column=0, sticky=tk.NW)
 f2_button.grid(row=2, column=0, sticky=tk.NW)
 greek_word_input = tk.Entry(wn, width=32, font=32)
+greek_word_input.bind('<Return>', search_word)
 greek_word_submit_button = tk.Button(wn, text="Αναζήτηση", command=search_word)
 canvas = tk.Canvas(wn, width = 500, height = 200, bg='dark orange', highlightthickness=0)
 search_textbox = tk.Entry(wn, width=50)
+search_textbox.bind('<Return>', get_search)
 run_tlg = tk.IntVar()
 run_lexigram = tk.IntVar()
 search_button = tk.Button(wn, text="Αναζήτηση", command=get_search)
