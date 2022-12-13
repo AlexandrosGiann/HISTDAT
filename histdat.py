@@ -8,7 +8,8 @@ wn.geometry("570x250")
 function = tk.IntVar(value=0)
 
 def search_word():
-    webbrowser.open('https://www.lexigram.gr/lex/arch/'+greek_word_input.get())
+    if run_lexigram.get() == 1:
+        webbrowser.open('https://www.lexigram.gr/lex/arch/'+greek_word_input.get())
     webbrowser.open('https://myria.math.aegean.gr/lds/web/view.php?search='+greek_word_input.get())
 
 def make_clear(word):
@@ -172,12 +173,14 @@ def greek_words():
     tlg_checkbox.grid_forget()
     greek_word_input.grid(row=0, column=1)
     greek_word_submit_button.grid(row=0, column=2)
+    lexigram_checkbox.grid(row=1, column=1)
     
 
 def greek_authors():
     wn.configure(bg="dark orange")
     greek_word_input.grid_forget()
     greek_word_submit_button.grid_forget()
+    lexigram_checkbox.grid_forget()
     canvas.grid(row=2, column=1, columnspan=4)           
     canvas.create_image(20,20, anchor=tk.NW, image=bg)
     search_textbox.grid(row=0, column=2, sticky=tk.W+tk.E)
@@ -194,7 +197,9 @@ greek_word_submit_button = tk.Button(wn, text="Αναζήτηση", command=sear
 canvas = tk.Canvas(wn, width = 500, height = 200, bg='dark orange', highlightthickness=0)
 search_textbox = tk.Entry(wn, width=50)
 run_tlg = tk.IntVar()
+run_lexigram = tk.IntVar()
 search_button = tk.Button(wn, text="Αναζήτηση", command=get_search)
+lexigram_checkbox = tk.Checkbutton(wn, bg='dark orange', text='Lexigram',variable=run_lexigram, onvalue=1, offvalue=0)
 tlg_checkbox = tk.Checkbutton(wn, bg='dark orange', text='TLG',variable=run_tlg, onvalue=1, offvalue=0)
 greek_authors()
 wn.mainloop()
