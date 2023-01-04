@@ -5,7 +5,6 @@ import webbrowser
 wn = tk.Tk()
 wn.title('Histdat by Alexandros Giannakis') # Πρόγραμμα από τον Αλέξανδρο Γιαννάκη
 wn.geometry("570x250")
-function = tk.IntVar(value=0)
 
 def search_word(event=None):
     if run_lexigram.get() == 1:
@@ -28,15 +27,35 @@ def make_clear(word):
     word = word.replace('Ϋ', 'Υ')
     return word
 
-def set_function_to_0():
-    function.set(0)
-    print(function.get())
-
-def set_function_to_1():
-    function.set(1)
-    print(function.get())
-
-authors = [['ΟΜΗΡΟΣ'], ['ΗΣΙΟΔΟΣ'], ['ΗΡΟΔΟΤΟΣ'], ['ΘΟΥΚΥΔΙΔΗΣ'], ['ΞΕΝΟΦΩΝ', 'ΞΕΝΟΦΩΝΤΑΣ'], ['ΠΛΑΤΩΝ', 'ΠΛΑΤΩΝΑΣ'], ['ΑΡΙΣΤΟΤΕΛΗΣ'], ['ΛΥΣΙΑΣ'], ['ΔΗΜΟΣΘΕΝΗΣ'], ['ΑΙΣΧΥΛΟΣ'], ['ΣΟΦΟΚΛΗΣ'], ['ΕΥΡΙΠΙΔΗΣ'], ['ΑΙΣΧΙΝΗΣ'], ['ΑΡΙΣΤΟΦΑΝΗΣ'], ['ΑΡΡΙΑΝΟΣ'], ['ΒΑΚΧΥΛΙΔΗΣ'], ['ΒΙΩΝ'], ['ΓΟΡΓΙΑΣ'], ['ΘΕΟΚΡΙΤΟΣ'], ['ΘΕΟΦΡΑΣΤΟΣ'], ['ΙΣΟΚΡΑΤΗΣ'], ['ΠΛΟΥΤΑΡΧΟΣ'], ['ΠΙΝΔΑΡΟΣ'], ['ΜΟΣΧΟΣ'], ['ΚΑΛΛΙΜΑΧΟΣ'], ['ΛΟΥΚΙΑΝΟΣ'], ['ΑΝΤΙΦΩΝ', 'ΑΝΤΙΦΩΝ ΡΗΤΩΡ'], ['ΛΟΓΓΟΣ']]
+authors = [['ΟΜΗΡΟΣ', 'HOMER', 'HOMERUS'],
+           ['ΗΣΙΟΔΟΣ', 'HESIOD'],
+           ['ΗΡΟΔΟΤΟΣ', 'HERODOTUS'],
+           ['ΘΟΥΚΥΔΙΔΗΣ', 'THUCYDIDES'],
+           ['ΞΕΝΟΦΩΝ', 'ΞΕΝΟΦΩΝΤΑΣ', 'XENOPHON'],
+           ['ΠΛΑΤΩΝ', 'ΠΛΑΤΩΝΑΣ', 'PLATO'],
+           ['ΑΡΙΣΤΟΤΕΛΗΣ', 'ARISTOTLE'],
+           ['ΛΥΣΙΑΣ', 'LYSIAS'],
+           ['ΔΗΜΟΣΘΕΝΗΣ', 'DEMOSTHENES'],
+           ['ΑΙΣΧΥΛΟΣ', 'AESCHYLUS'],
+           ['ΣΟΦΟΚΛΗΣ', 'SOPHOCLES'],
+           ['ΕΥΡΙΠΙΔΗΣ', 'EURIPIDES'],
+           ['ΑΙΣΧΙΝΗΣ', 'AESCHINES'],
+           ['ΑΡΙΣΤΟΦΑΝΗΣ', 'ARISTOPHANES'],
+           ['ΑΡΡΙΑΝΟΣ', 'ARRIAN'],
+           ['ΒΑΚΧΥΛΙΔΗΣ', 'BACCHYLIDES'],
+           ['ΒΙΩΝ', 'BION'],
+           ['ΓΟΡΓΙΑΣ', 'GORGIAS'],
+           ['ΘΕΟΚΡΙΤΟΣ', 'THEOCRITUS'],
+           ['ΘΕΟΦΡΑΣΤΟΣ', 'THEOPHRASTUS'],
+           ['ΙΣΟΚΡΑΤΗΣ', 'ISOCRATES'],
+           ['ΠΛΟΥΤΑΡΧΟΣ', 'PLUTARCH'],
+           ['ΠΙΝΔΑΡΟΣ', 'PINDAR', 'PINDARUS'],
+           ['ΜΟΣΧΟΣ', 'MOSCHUS'],
+           ['ΚΑΛΛΙΜΑΧΟΣ', 'CALLIMACHUS'],
+           ['ΛΟΥΚΙΑΝΟΣ', 'LUCIAN'],
+           ['ΑΝΤΙΦΩΝ', 'ΑΝΤΙΦΩΝ ΡΗΤΩΡ', 'ANTIPHON'],
+           ['ΛΟΓΓΟΣ', 'LONGUS']
+]
 greek_language_urls = ['https://www.greek-language.gr/digitalResources/ancient_greek/library/index.html?author_id=194',
                        'https://www.greek-language.gr/digitalResources/ancient_greek/library/index.html?author_id=156',
                        'https://www.greek-language.gr/digitalResources/ancient_greek/library/index.html?author_id=153',
@@ -154,7 +173,9 @@ more_urls = [['http://users.sch.gr/ipap/Ellinikos%20Politismos/Yliko/OMHROS-ILIA
              []
 ]
 
-def get_search(event=None):
+greek_letter = ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ρ', ['σ', 'ς'], 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω', ['ά', 'ά'], ['έ', 'έ'], ['ή', 'ή'], ['ί', 'ί'], ['ό', 'ό'], ['ύ', 'ύ'], ['ώ', 'ώ'], 'ὰ', 'ὲ', 'ὴ', 'ὶ', 'ὸ', 'ὺ', 'ὼ', 'ᾶ', 'ῆ', 'ῖ', 'ῦ', 'ῶ']
+greek_letter_perseus_format = ['a', 'b', 'g', 'd', 'e', 'z', 'h', 'q', 'i', 'k', 'l', 'm', 'n', 'c', 'o', 'p', 'r', 's', 't', 'u', 'f', 'x', 'y', 'w', 'a/', 'e/', 'h/', 'i/', 'o/', 'u/', 'w/', 'a\\', 'e\\', 'h\\', 'i\\', 'o\\', 'u\\', 'w\\', 'a=', 'h=', 'i=', 'u=', 'w=']
+def search_author(event=None):
     author = search_textbox.get()
     for i in range(len(authors)):
         if make_clear(author) in authors[i]:
@@ -194,13 +215,13 @@ f1_button.grid(row=1, column=0, sticky=tk.NW)
 f2_button.grid(row=2, column=0, sticky=tk.NW)
 greek_word_input = tk.Entry(wn, width=32, font=32)
 greek_word_input.bind('<Return>', search_word)
-greek_word_submit_button = tk.Button(wn, text="Αναζήτηση", command=search_word)
+greek_word_submit_button = tk.Button(wn, text="Search", command=search_word)
 canvas = tk.Canvas(wn, width = 500, height = 200, bg='dark orange', highlightthickness=0)
 search_textbox = tk.Entry(wn, width=50)
-search_textbox.bind('<Return>', get_search)
+search_textbox.bind('<Return>', search_author)
 run_tlg = tk.IntVar()
 run_lexigram = tk.IntVar()
-search_button = tk.Button(wn, text="Αναζήτηση", command=get_search)
+search_button = tk.Button(wn, text="Search", command=search_author)
 lexigram_checkbox = tk.Checkbutton(wn, bg='dark orange', text='Lexigram',variable=run_lexigram, onvalue=1, offvalue=0)
 tlg_checkbox = tk.Checkbutton(wn, bg='dark orange', text='TLG',variable=run_tlg, onvalue=1, offvalue=0)
 greek_authors()
