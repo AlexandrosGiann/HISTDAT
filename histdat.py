@@ -28,7 +28,7 @@ def make_clear(word):
     return word
 
 authors = [['ΟΜΗΡΟΣ', 'HOMER', 'HOMERUS'],
-           ['ΗΣΙΟΔΟΣ', 'HESIOD'],
+           ['ΗΣΙΟΔΟΣ', 'HESIOD', 'HESIODUS'],
            ['ΗΡΟΔΟΤΟΣ', 'HERODOTUS'],
            ['ΘΟΥΚΥΔΙΔΗΣ', 'THUCYDIDES'],
            ['ΞΕΝΟΦΩΝ', 'ΞΕΝΟΦΩΝΤΑΣ', 'XENOPHON'],
@@ -52,7 +52,7 @@ authors = [['ΟΜΗΡΟΣ', 'HOMER', 'HOMERUS'],
            ['ΠΙΝΔΑΡΟΣ', 'PINDAR', 'PINDARUS'],
            ['ΜΟΣΧΟΣ', 'MOSCHUS'],
            ['ΚΑΛΛΙΜΑΧΟΣ', 'CALLIMACHUS'],
-           ['ΛΟΥΚΙΑΝΟΣ', 'LUCIAN'],
+           ['ΛΟΥΚΙΑΝΟΣ', 'LUCIANUS'],
            ['ΑΝΤΙΦΩΝ', 'ΑΝΤΙΦΩΝ ΡΗΤΩΡ', 'ANTIPHON'],
            ['ΛΟΓΓΟΣ', 'LONGUS']
 ]
